@@ -87,6 +87,14 @@ namespace Dapper.Tests.Contrib
         public string Name { get; set; }
         public int Order { get; set; }
     }
+	
+	[Table("NullableKey")]
+    public class NullableKey
+    {
+        [Key]
+        public int? Id { get; set; }
+        public string Name { get; set; }
+    }
 
     public abstract partial class TestSuite
     {
@@ -635,6 +643,15 @@ namespace Dapper.Tests.Contrib
                 connection.DeleteAll<User>().IsTrue();
                 connection.Get<User>(id1).IsNull();
                 connection.Get<User>(id2).IsNull();
+            }
+        }
+		
+		[Fact]
+        public void NullableKey()
+        {
+            using (var connection = GetOpenConnection())
+            {
+                var id1 = connection.Insert(new NullableKey { Name = "Alice" });
             }
         }
     }

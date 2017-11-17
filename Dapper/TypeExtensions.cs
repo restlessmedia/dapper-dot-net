@@ -101,6 +101,17 @@ namespace Dapper
 #endif
         }
 
+		public static bool IsNullable(this Type type, out Type underlyingType)
+        {
+            if (IsGenericType(type) && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                underlyingType = Nullable.GetUnderlyingType(type);
+                return true;
+            }
 
+            underlyingType = null;
+
+            return false;
+        }
     }
 }

@@ -710,7 +710,9 @@ public partial class SqlServerAdapter : ISqlAdapter
         if (!propertyInfos.Any()) return id;
 
         var idProperty = propertyInfos.First();
-        idProperty.SetValue(entityToInsert, Convert.ChangeType(id, idProperty.PropertyType), null);
+		Type idNullableType;
+        var idType = idProperty.PropertyType.IsNullable(out idNullableType) ? idNullableType : idProperty.PropertyType;
+        idProperty.SetValue(entityToInsert, Convert.ChangeType(id, idType), null);
 
         return id;
     }
@@ -741,7 +743,9 @@ public partial class SqlCeServerAdapter : ISqlAdapter
         if (!propertyInfos.Any()) return id;
 
         var idProperty = propertyInfos.First();
-        idProperty.SetValue(entityToInsert, Convert.ChangeType(id, idProperty.PropertyType), null);
+		Type idNullableType;
+        var idType = idProperty.PropertyType.IsNullable(out idNullableType) ? idNullableType : idProperty.PropertyType;
+        idProperty.SetValue(entityToInsert, Convert.ChangeType(id, idType), null);
 
         return id;
     }
@@ -849,7 +853,9 @@ public partial class SQLiteAdapter : ISqlAdapter
         if (!propertyInfos.Any()) return id;
 
         var idProperty = propertyInfos.First();
-        idProperty.SetValue(entityToInsert, Convert.ChangeType(id, idProperty.PropertyType), null);
+		Type idNullableType;
+        var idType = idProperty.PropertyType.IsNullable(out idNullableType) ? idNullableType : idProperty.PropertyType;
+        idProperty.SetValue(entityToInsert, Convert.ChangeType(id, idType), null);
 
         return id;
     }

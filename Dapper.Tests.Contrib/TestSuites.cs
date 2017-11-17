@@ -56,6 +56,8 @@ namespace Dapper.Tests.Contrib
                 connection.Execute(@"CREATE TABLE ObjectY (ObjectYId int not null, Name nvarchar(100) not null);");
                 dropTable("ObjectZ");
                 connection.Execute(@"CREATE TABLE ObjectZ (Id int not null, Name nvarchar(100) not null);");
+				dropTable("NullableKey");
+                connection.Execute(@"CREATE TABLE NullableKey (Id int IDENTITY(1,1) not null, Name nvarchar(100) not null);");
             }
         }
     }
@@ -104,6 +106,8 @@ namespace Dapper.Tests.Contrib
                     connection.Execute(@"CREATE TABLE ObjectY (ObjectYId int not null, Name nvarchar(100) not null);");
                     dropTable("ObjectZ");
                     connection.Execute(@"CREATE TABLE ObjectZ (Id int not null, Name nvarchar(100) not null);");
+					dropTable("NullableKey");
+                    connection.Execute(@"CREATE TABLE NullableKey (Id int not null AUTO_INCREMENT PRIMARY KEY, Name nvarchar(100) not null);");
                 }
             }
             catch (MySqlException e)
@@ -145,6 +149,7 @@ namespace Dapper.Tests.Contrib
                 connection.Execute(@"CREATE TABLE ObjectX (ObjectXId nvarchar(100) not null, Name nvarchar(100) not null) ");
                 connection.Execute(@"CREATE TABLE ObjectY (ObjectYId integer not null, Name nvarchar(100) not null) ");
                 connection.Execute(@"CREATE TABLE ObjectZ (Id integer not null, Name nvarchar(100) not null) ");
+				connection.Execute(@"CREATE TABLE NullableKey (Id integer primary key autoincrement not null, Name nvarchar(100) not null) ");
             }
         }
     }
@@ -176,6 +181,7 @@ namespace Dapper.Tests.Contrib
                 connection.Execute(@"CREATE TABLE ObjectX (ObjectXId nvarchar(100) not null, Name nvarchar(100) not null) ");
                 connection.Execute(@"CREATE TABLE ObjectY (ObjectYId int not null, Name nvarchar(100) not null) ");
                 connection.Execute(@"CREATE TABLE ObjectZ (Id int not null, Name nvarchar(100) not null) ");
+				connection.Execute(@"CREATE TABLE NullableKey (Id int IDENTITY(1,1) not null, Name nvarchar(100) not null) ");
             }
             Console.WriteLine("Created database");
         }
